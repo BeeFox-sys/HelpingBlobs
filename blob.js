@@ -56,7 +56,7 @@ applyVector(x,y){
 update(){
   this.vel.add(this.acc);
   this.acc.set(0,0);
-  if(this.pos.y>=height-100 && this.vel.y > 0){
+  if(this.pos.y>=height-10 && this.vel.y > 0){
     this.vel.set(0,0);
   }
   if(this.pos.x >= width-this.radi && this.vel.x > 0){

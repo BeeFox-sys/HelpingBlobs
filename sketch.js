@@ -1,7 +1,7 @@
 var blob,dragAng,dragDist,dragStart, grav;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(400, 400);
   colorMode(HSB);
   bg = loadImage("meadow.jpg");
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
