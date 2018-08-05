@@ -1,4 +1,4 @@
-var blob,dragAng,dragDist,dragStart, grav;
+var blob,dragAng,dragDist,dragStart,grav;
 
 function setup() {
   createCanvas(400, 400);
@@ -33,6 +33,24 @@ function mouseDragged(){
 }
 
 function mouseReleased(){
-  blob.applyVector(random(-5,5),-1)
+  if(dragStart){
+  blob.applyVector(random(-5,5),-1);
   dragStart = false;
+}
+}
+
+function saveBlob(){
+  array = [blob.radi, blob.mood, blob.blobness, blob.hue, blob.sat, blob.bri, blob.eyeHeight, blob.eyeDist, blob.eyeRadi, blob.eyeHue, blob.eyeSat, blob.eyeBri];
+  document.cookie = "blob="+array;
+
+}
+function loadBlob() {
+  decodedCookie = decodeURIComponent(document.cookie);
+  decodedArray = decodedCookie.split("=");
+  array = decodedArray[1].split(",");
+  for(var i = 0; i < array.length; i++){
+    array[i] = +array[i];
+  }
+  blob = new Blob(width/2,height/2,array[0],array[1],array[2],array[3],array[4],array[5],array[6],array[7],array[8],array[9],array[10],array[11]);
+
 }

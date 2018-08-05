@@ -1,17 +1,20 @@
 class Blob{
 
-constructor(xpos, ypos, r, m, b,ch,cs,cb,eh,ed,er,ec){
-  this.radi =  r || random(50, 195);
+constructor(xpos, ypos, r, m, b,ch,cs,cb,eh,ed,er,ehu,es,eb){
+  this.radi =  r || random(25, 100);
   this.blobness = b || random(2, 2.8);
   this.hue = ch || random(40, 270);
   this.sat = cs || random(50, 100);
   this.bri = cb || random(50, 100);
   this.blobFill = color(this.hue, this.sat, this.bri);
   this.blobStroke = color(this.hue, this.sat, (this.bri-25));
-  this.eyeHeight = eh || constrain(random(-this.radi),-this.radi+50,0);
-  this.eyeDist = ed || random(50, this.radi+this.eyeHeight);
-  this.eyeRadi = er || random(10,this.radi/10);
-  this.eyeColour = ec || color(random(360),random(100),random(50,100));
+  this.eyeHeight = eh || constrain(random(-this.radi),-this.radi+25,0);
+  this.eyeDist = ed || random(25, this.radi+this.eyeHeight);
+  this.eyeRadi = er || random(10,this.radi/5);
+  this.eyeHue = ehu || random(360);
+  this.eyeSat = es || random(100);
+  this.eyeBri = eb || random(50,100);
+  this.eyeColour = color(this.eyeHue,this.eyeSat,this.eyeBri)
   this.pos =  createVector(0,0);
   if(xpos != null && ypos != null){
     this.pos.set(xpos,ypos);
@@ -56,7 +59,7 @@ applyVector(x,y){
 update(){
   this.vel.add(this.acc);
   this.acc.set(0,0);
-  if(this.pos.y>=height-10 && this.vel.y > 0){
+  if(this.pos.y>=height-100 && this.vel.y > 0){
     this.vel.set(0,0);
   }
   if(this.pos.x >= width-this.radi && this.vel.x > 0){
@@ -69,9 +72,4 @@ update(){
   }
   this.pos.add(this.vel);
 }
-
-
-
-
-
 }

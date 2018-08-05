@@ -1,0 +1,14 @@
+canvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+}
+
+#controls {
+  position: relative;
+  top: 10px;
+  left: 118px;
+  z-index: 1;
+
+}
