@@ -20,7 +20,7 @@ constructor(xpos, ypos, r, m, b,ch,cs,cb,eh,ed,er,ec){
   }
   this.acc = createVector(0,0);
   this.vel = createVector(0,0);
-  this.vel.limit(10);
+  this.vel.limit(8);
   this.mood = m || random(0.2,2);
 }
 
