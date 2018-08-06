@@ -5,14 +5,49 @@
   <style> body {padding: 0; margin: 0;} </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="p5.min.js"></script>
+  <script src="pageControl.js"></script>
   <script src="blob.js"></script>
   <script src="sketch.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
-  <div id="controls">
-  <input type="submit" value="Save Blob" onclick="saveBlob();">
-  <input type="submit" value="Load Blob" onclick="loadBlob();">
-</div>
+<body onload="loadTab(event, 'Stats')"
+
+  <div id="tabControl">
+    <div class="tabs">
+      <input type='button', onClick='loadTab(event, "Stats")', value="Stats", class="tabButton">
+      <input type='button', onClick='loadTab(event, "Mood")', value="Mood", class="tabButton">
+      <input type='button', onClick='loadTab(event, "Hunger")', value="Hunger", class="tabButton">
+      <input type='button', onClick='loadTab(event, "Health")', value="Health", class="tabButton">
+      <input type='button', onClick='loadTab(event, "Activity")', value="Activity", class="tabButton">
+      <input type='button', onClick='loadTab(event, "Settings")', value="Settings", class="tabButton">
+    </div>
+
+    <div id="Stats" class="tab">
+      <p>Stats</p>
+    </div>
+
+    <div id="Mood" class="tab">
+      <p>Mood</p>
+    </div>
+
+    <div id="Hunger" class="tab">
+      <p>Hunger</p>
+    </div>
+
+    <div id="Health" class="tab">
+      <p>Health</p>
+    </div>
+
+    <div id="Activity" class="tab">
+      <p>Activity</p>
+    </div>
+
+    <div id="Settings" class="tab">
+      <p>Settings</p>
+    </div>
+  </div>
+
+  <div id="Sketch"></div>
+
 </body>
 </html>

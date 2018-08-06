@@ -1,14 +1,41 @@
-canvas {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: -1;
+#sketch{
+  z-index: 0;
 }
 
-#controls {
-  position: relative;
-  top: 10px;
-  left: 118px;
+#tabControl{
+  float:left;
+  width: 50%;
+  margin-left: 10px;
   z-index: 1;
+}
 
+.tabs {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tabs input {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tabs input:hover {
+    background-color: #ddd;
+}
+
+.tabs input.active {
+    background-color: #ccc;
+}
+
+.tab {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
 }
