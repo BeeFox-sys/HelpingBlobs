@@ -1,7 +1,7 @@
 var blob,dragAng,dragDist,dragStart,grav;
 
 function setup() {
-  canvas = createCanvas(400, 400);
+  canvas = createCanvas(windowWidth/3, windowWidth/3);
   canvas.parent('Sketch');
   colorMode(HSB);
   bg = loadImage("meadow.jpg");
@@ -19,6 +19,10 @@ function draw() {
   blob.update();
 }
   blob.drawBlob();
+  stroke(0);
+  noFill()
+  strokeWeight(5);
+  rect(0,0,width-1,height-1);
 }
 
 function mousePressed(){
@@ -54,4 +58,8 @@ function loadBlob() {
   }
   blob = new Blob(width/2,height/2,array[0],array[1],array[2],array[3],array[4],array[5],array[6],array[7],array[8],array[9],array[10],array[11]);
 
+}
+
+  function windowResized() {
+  resizeCanvas(windowWidth/3, windowWidth/3);
 }

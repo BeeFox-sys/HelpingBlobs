@@ -10,44 +10,51 @@
   <script src="sketch.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body onload="loadTab(event, 'Stats')"
+<body onload="loadTab(event, 'Stats')">
 
-  <div id="tabControl">
-    <div class="tabs">
-      <input type='button', onClick='loadTab(event, "Stats")', value="Stats", class="tabButton">
-      <input type='button', onClick='loadTab(event, "Mood")', value="Mood", class="tabButton">
-      <input type='button', onClick='loadTab(event, "Hunger")', value="Hunger", class="tabButton">
-      <input type='button', onClick='loadTab(event, "Health")', value="Health", class="tabButton">
-      <input type='button', onClick='loadTab(event, "Activity")', value="Activity", class="tabButton">
-      <input type='button', onClick='loadTab(event, "Settings")', value="Settings", class="tabButton">
-    </div>
+  <table>
+    <tr>
+      <td></td>
+      <td>
+        <div id="Sketch"></div>
+      </td>
+      <td>
+        <div id="tabControl">
+          <div class="tabs">
+            <input type='button', onClick='loadTab(event, "Stats")', value="Stats", class="tabButton">
+            <input type='button', onClick='loadTab(event, "Mood")', value="Mood", class="tabButton">
+            <input type='button', onClick='loadTab(event, "Hunger")', value="Hunger", class="tabButton">
+            <input type='button', onClick='loadTab(event, "Health")', value="Health", class="tabButton">
+            <input type='button', onClick='loadTab(event, "Activity")', value="Activity", class="tabButton">
+            <input type='button', onClick='loadTab(event, "Settings")', value="Settings", class="tabButton">
+          </div>
 
-    <div id="Stats" class="tab">
-      <p>Stats</p>
-    </div>
+          <div id="Stats" class="tab">
+            <p>Stats</p>
+          </div>
 
-    <div id="Mood" class="tab">
-      <p>Mood</p>
-    </div>
+          <div id="Mood" class="tab">
+            <p>Mood</p>
+          </div>
 
-    <div id="Hunger" class="tab">
-      <p>Hunger</p>
-    </div>
+          <div id="Hunger" class="tab">
+            <p>Hunger</p>
+          </div>
 
-    <div id="Health" class="tab">
-      <p>Health</p>
-    </div>
+          <div id="Health" class="tab">
+            <p>Health</p>
+          </div>
 
-    <div id="Activity" class="tab">
-      <p>Activity</p>
-    </div>
+          <div id="Activity" class="tab">
+            <p>Activity</p>
+          </div>
 
-    <div id="Settings" class="tab">
-      <p>Settings</p>
-    </div>
-  </div>
-
-  <div id="Sketch"></div>
-
+          <div id="Settings" class="tab">
+            <p>Settings</p>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
