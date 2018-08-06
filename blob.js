@@ -59,8 +59,14 @@ applyVector(x,y){
 update(){
   this.vel.add(this.acc);
   this.acc.set(0,0);
-  if(this.pos.y>=height-100 && this.vel.y > 0){
+  if(this.pos.y > height){
+
+  }else if(this.pos.y>=height-100 && this.vel.y > 0){
     this.vel.set(0,0);
+  }
+  if(this.pos.y > height+this.radi){
+    this.pos.set(width/2,-height);
+    this.applyVector(random(-5,5),random(-10,-3));
   }
   if(this.pos.x >= width-this.radi && this.vel.x > 0){
     this.vel.set(-this.vel.x, this.vel.y);
@@ -68,6 +74,9 @@ update(){
     this.vel.set(-this.vel.x, this.vel.y);
   }
   if(random(100)<this.mood&&this.pos.y>=height-100){
+    this.applyVector(random(-5,5),random(-10,-3));
+  }
+  if((this.pos.x >= width+this.radi-10||this.pos.x <= -this.radi+10)&&this.pos.y>=height-100){
     this.applyVector(random(-5,5),random(-10,-3));
   }
   this.pos.add(this.vel);
