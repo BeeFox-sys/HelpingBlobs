@@ -6,55 +6,127 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="p5.min.js"></script>
   <script src="pageControl.js"></script>
+  <script src="fly.js"></script>
   <script src="blob.js"></script>
   <script src="sketch.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body onload="loadTab(event, 'Stats')">
-
+  <div class="center">
   <table>
     <tr>
-      <td></td>
-      <td>
+      <td class="mainTD" id="vaAuto">
+        <table id='CareBars'>
+            <tr><td id='blobName'><h1><b><p>Name</p></h1></b></td></tr>
+            <tr><td><div class="unfilled"><div id=HealthBar>Health</div></div>
+            <tr><td><div class="unfilled"><div id=MoodBar>Mood</div></div>
+            <tr><td><div class="unfilled"><div id=HygieneBar>Hygiene</div></div>
+            <tr><td><div class="unfilled"><div id=ActivityBar>Activity</div></div>
+        </table>
+      </td>
+      <td class="mainTD">
         <div id="Sketch"></div>
       </td>
-      <td>
+      <td class="mainTD">
         <div id="tabControl">
           <div class="tabs">
             <input type='button', onClick='loadTab(event, "Stats")', value="Stats", class="tabButton">
-            <input type='button', onClick='loadTab(event, "Mood")', value="Mood", class="tabButton">
-            <input type='button', onClick='loadTab(event, "Hunger")', value="Hunger", class="tabButton">
             <input type='button', onClick='loadTab(event, "Health")', value="Health", class="tabButton">
+            <input type='button', onClick='loadTab(event, "Mood")', value="Mood", class="tabButton">
+            <input type='button', onClick='loadTab(event, "Hygiene")', value="Hygiene", class="tabButton">
             <input type='button', onClick='loadTab(event, "Activity")', value="Activity", class="tabButton">
             <input type='button', onClick='loadTab(event, "Settings")', value="Settings", class="tabButton">
           </div>
 
           <div id="Stats" class="tab">
-            <p>Stats</p>
+            <table>
+              <tr>
+                <td>Age:</td>
+                <td id="age"></td>
+              </tr>
+            </table>
           </div>
 
           <div id="Mood" class="tab">
-            <p>Mood</p>
+            <table>
+              <tr>
+                <td><input value="Fill Mood", type="button", onclick="blob.mood=100"></td>
+                <td><input value="Empty Mood", type="button", onclick="blob.mood=0"></td>
+              </tr>
+              <tr>
+                <td><input value="Mood +1", type="button", onclick="if(blob.mood+1 <= 100){blob.mood+=1}"></td>
+                <td><input value="Mood -1", type="button", onclick="if(blob.mood-1 >=0){blob.mood-=1}"></td>
+              </tr>
+              <tr>
+                <td><input value="Mood +10", type="button", onclick="if(blob.mood+10 <= 100){blob.mood+=10}"></td>
+                <td><input value="Mood -10", type="button", onclick="if(blob.mood-10 >= 0){blob.mood-=10}"></td>
+              </tr>
+            </table>
           </div>
 
-          <div id="Hunger" class="tab">
-            <p>Hunger</p>
+          <div id="Hygiene" class="tab">
+            <table>
+              <tr>
+                <td><input value="Fill Hygiene", type="button", onclick="blob.hygiene=100"></td>
+                <td><input value="Empty Hygiene", type="button", onclick="blob.hygiene=0"></td>
+              </tr>
+              <tr>
+                <td><input value="Hygiene +1", type="button", onclick="if(blob.hygiene+1 <= 100){blob.hygiene+=1}"></td>
+                <td><input value="Hygiene -1", type="button", onclick="if(blob.hygiene-1 >=0){blob.hygiene-=1}"></td>
+              </tr>
+              <tr>
+                <td><input value="Hygiene +10", type="button", onclick="if(blob.hygiene+10 <= 100){blob.hygiene+=10}"></td>
+                <td><input value="Hygiene -10", type="button", onclick="if(blob.hygiene-10 >= 0){blob.hygiene-=10}"></td>
+              </tr>
+            </table>
           </div>
 
           <div id="Health" class="tab">
-            <p>Health</p>
+            <table>
+              <tr>
+                <td><input value="Fill Health", type="button", onclick="blob.health=100"></td>
+                <td><input value="Empty Health", type="button", onclick="blob.health=0"></td>
+              </tr>
+              <tr>
+                <td><input value="Health +1", type="button", onclick="if(blob.health+1 <= 100){blob.health+=1}"></td>
+                <td><input value="Health -1", type="button", onclick="if(blob.health-1 >=0){blob.health-=1}"></td>
+              </tr>
+              <tr>
+                <td><input value="Health +10", type="button", onclick="if(blob.health+10 <= 100){blob.health+=10}"></td>
+                <td><input value="Health -10", type="button", onclick="if(blob.health-10 >= 0){blob.health-=10}"></td>
+              </tr>
+            </table>
           </div>
 
           <div id="Activity" class="tab">
-            <p>Activity</p>
+            <table>
+              <tr>
+                <td><input value="Fill Activity", type="button", onclick="blob.activity=100"></td>
+                <td><input value="Empty Activity", type="button", onclick="blob.activity=0"></td>
+              </tr>
+              <tr>
+                <td><input value="Activity +1", type="button", onclick="if(blob.activity+1 <= 100){blob.activity+=1}"></td>
+                <td><input value="Activity -1", type="button", onclick="if(blob.activity-1 >=0){blob.activity-=1}"></td>
+              </tr>
+              <tr>
+                <td><input value="Activity +10", type="button", onclick="if(blob.activity+10 <= 100){blob.activity+=10}"></td>
+                <td><input value="Activity -10", type="button", onclick="if(blob.activity-10 >= 0){blob.activity-=10}"></td>
+              </tr>
+            </table>
           </div>
 
           <div id="Settings" class="tab">
-            <p>Settings</p>
+            <table>
+              <tr>
+                <td><input value="Release Blob", type="button", onclick="releaseBlob()"></td>
+              </tr>
+            </table>
           </div>
+
         </div>
       </td>
     </tr>
   </table>
+</div>
 </body>
 </html>

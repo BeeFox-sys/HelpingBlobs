@@ -1,7 +1,56 @@
-td{
-  width: 33%;
-  vertical-align: top;
+.unfilled{
+  width: 100%;
+  background-color: #ccc;
+  text-align: center;
+}
+
+#HealthBar{
+  width:100%;
+  height: 100%;
+  background-color: #e44;
+}
+
+#MoodBar{
+  width:100%;
+  height: 100%;
+  background-color: #ffea00
+}
+
+#HygieneBar{
+  width:100%;
+  height: 100%;
+  background-color: #35cb;
+}
+
+#ActivityBar{
+  width:100%;
+  height: 100%;
+  background-color: #44e800;
+}
+
+
+
+.center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 100%
+}
+
+#blobName{
+  height: 10%;
+  text-align: center;
+}
+
+.maintd{
+  width: 33%;
+  height: 100%;
+  vertical-align: middle;
+  border-color: #000000;
+}
+
+#tabControl table{
+  width: 100%
 }
 
 #tabControl{
@@ -9,6 +58,19 @@ td{
   height:100%;
   float:none;
   top:0;
+  overflow: hidden;
+}
+
+#CareBars{
+  width: 100%;
+  height: 100%;
+}
+
+
+
+progress{
+  float: right;
+  width: 75%
 }
 
 .tabs {
@@ -38,7 +100,5 @@ td{
 .tab {
     display: none;
     padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
     height:100%;
 }

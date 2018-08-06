@@ -1,19 +1,17 @@
 class Blob{
 
-constructor(xpos, ypos, r, m, b,ch,cs,cb,eh,ed,er,ehu,es,eb){
-  this.radi =  r || random(25, 100);
-  this.blobness = b || random(2, 2.8);
-  this.hue = ch || random(40, 270);
-  this.sat = cs || random(50, 100);
-  this.bri = cb || random(50, 100);
-  this.blobFill = color(this.hue, this.sat, this.bri);
-  this.blobStroke = color(this.hue, this.sat, (this.bri-25));
-  this.eyeHeight = eh || constrain(random(-this.radi),-this.radi+25,0);
-  this.eyeDist = ed || random(25, this.radi+this.eyeHeight);
-  this.eyeRadi = er || random(10,this.radi/5);
-  this.eyeHue = ehu || random(360);
-  this.eyeSat = es || random(100);
-  this.eyeBri = eb || random(50,100);
+constructor(xpos, ypos, r, m, b,ch,cs,cb,eh,ed,er,ehu,es,eb,ag, hy, ac, hel, name){
+  this.radi =  +r || random(25, 100);
+  this.blobness = +b || random(2, 2.8);
+  this.hue = +ch || random(40, 270);
+  this.sat = +cs || random(50, 100);
+  this.bri = +cb || random(50, 100);
+  this.eyeHeight = +eh || constrain(random(-this.radi),-this.radi+25,0);
+  this.eyeDist = +ed || random(25, this.radi+this.eyeHeight);
+  this.eyeRadi = +er || random(10,this.radi/5);
+  this.eyeHue = +ehu || random(360);
+  this.eyeSat = +es || random(100);
+  this.eyeBri = +eb || random(50,100);
   this.eyeColour = color(this.eyeHue,this.eyeSat,this.eyeBri)
   this.pos =  createVector(0,0);
   if(xpos != null && ypos != null){
@@ -24,7 +22,26 @@ constructor(xpos, ypos, r, m, b,ch,cs,cb,eh,ed,er,ehu,es,eb){
   this.acc = createVector(0,0);
   this.vel = createVector(0,0);
   this.vel.limit(8);
-  this.mood = m || random(0.2,2);
+  this.created = +ag || Math.floor(((Date.now() / 1000)/60)/60)
+  this.age = Math.floor(((Date.now() / 1000)/60)/60) - this.created;
+  this.release = false;
+
+  //Stats
+  this.mood = +m || 100;
+  this.hygiene = +hy || 100;
+  this.health = +hel || 100;
+  this.activity = +ac || 100;
+  this.name = name || null;
+  console.log(this.name)
+  if(this.name == null){
+    this.name = window.prompt("Name your new blob!", "Blobby");
+  }
+  if(this.name == null){
+    this.name = "Blobby";
+  }
+  this.actSat = map(this.activity,0,100,50,0);
+  this.blobFill = color(this.hue, this.sat-this.actSat, this.bri);
+  this.blobStroke = color(this.hue, this.sat-this.actSat, (this.bri-25));
 }
 
 drawBlob(){
@@ -59,6 +76,7 @@ applyVector(x,y){
 update(){
   this.vel.add(this.acc);
   this.acc.set(0,0);
+  if(!this.release){
   if(this.pos.y > height){
 
   }else if(this.pos.y>=height-100 && this.vel.y > 0){
@@ -73,12 +91,27 @@ update(){
   } else if(this.pos.x <= this.radi && this.vel.x < 0){
     this.vel.set(-this.vel.x, this.vel.y);
   }
-  if(random(100)<this.mood&&this.pos.y>=height-100){
+  if(random(100)<map(this.mood,0,100,0.2,2)&&this.pos.y>=height-100){
     this.applyVector(random(-5,5),random(-10,-3));
   }
   if((this.pos.x >= width+this.radi-10||this.pos.x <= -this.radi+10)&&this.pos.y>=height-100){
     this.applyVector(random(-5,5),random(-10,-3));
   }
+}else{
+  if(this.pos.y>=height-100 && this.vel.y > 0){
+    this.vel.set(0,0);
+  }
+  if(frameCount % 30 == 0 && this.pos.y>=height-100){
+    this.applyVector(3,-4);
+  }
+  if(this.pos.x>width+(this.radi*2)){
+    newBlob();
+  }
+}
   this.pos.add(this.vel);
+  this.age = Math.floor(((Date.now() / 1000)/60)/60) - this.created;
+  this.actSat = map(this.activity,0,100,50,0);
+  this.blobFill = color(this.hue, this.sat-this.actSat, this.bri);
+  this.blobStroke = color(this.hue, this.sat-this.actSat, (this.bri-25));
 }
 }
