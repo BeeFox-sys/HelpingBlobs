@@ -14,7 +14,20 @@ function setup() {
    } else {
      loadBlob();
    }
-    $("#lastOn").html(localStorage.lastOn);
+   lastHours = int(Math.floor(((Date.now() / 1000)/60)/60)) - localStorage.laston
+   if(lastHours == 1){
+     $("#lastOn").html(lastHours+" Hour ago");
+ } else if(+lastHours>=48*7){
+   $("#lastOn").html(int(+lastHours/24/7)+" Weeks ago");
+ } else if(+lastHours>=24*7){
+   $("#lastOn").html(int(+lastHours/24/7)+" Week ago");
+ } else if(+lastHours>=24){
+   $("#lastOn").html(int(+lastHours/24)+" Day ago");
+ }else if(+lastHours>=48){
+   $("#lastOn").html(int(+lastHours/24)+" Days ago");
+ } else{
+     $("#lastOn").html(lastHours+" Hours ago");
+ }
  }
  flies = []
 
@@ -48,7 +61,6 @@ function draw() {
   $("#HygieneBar").css("width", blob.hygiene+"%")
   $("#ActivityBar").css("width", blob.activity+"%")
   $("#blobName").html("<h1><b>"+blob.name+"</h1></b>")
-  $("#currentTime").html(Math.floor(((Date.now() / 1000)/60)/60))
 
   if(blob.health == 0 && !blob.release){
     window.alert(blob.name+" felt uncared for. \nThey ran away!");
@@ -88,7 +100,7 @@ function saveBlob(){
   'eyeBri':blob.eyeBri, 'created':blob.created, 'hygiene':blob.hygiene, 'activity':blob.activity, 'health':blob.health,
   'name':str(blob.name)};
   localStorage.setItem('blob', JSON.stringify(blobJSON));
-  localStorage.setItem('lastOn',  Math.floor(((Date.now() / 1000)/60)/60))
+  localStorage.setItem('laston',  int(Math.floor(((Date.now() / 1000)/60)/60)));
 }
 function loadBlob() {
   blobJSON = eval("(" + localStorage.blob + ')');
@@ -115,7 +127,4 @@ function releaseBlob() {
 
 function newBlob(){
   blob = new Blob(width/2, -height);
-}
-function valBetween(v, min, max) {
-    return (Math.min(max, Math.max(min, v)));
 }
