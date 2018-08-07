@@ -25,8 +25,11 @@ class Fly{
     if(this.pos.x > width-this.size || this.pos.x < this.size){
       this.vel.set(-this.vel.x,0)
     }
-    if(this.pos.y > height/5*4 || this.pos.y < this.size){
+    if(this.pos.y < this.size){
       this.vel.set(0, -this.vel.y)
+    }
+    if(this.pos.y > height/5*4){
+      this.vel.add(0,-0.1)
     }
     this.pos.add(this.vel)
 

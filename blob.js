@@ -1,6 +1,6 @@
 class Blob{
 
-constructor(xpos, ypos, r, m, b,ch,cs,cb,eh,ed,er,ehu,es,eb,ag, hy, ac, hel, name){
+constructor(xpos, ypos, r, m=-1, b,ch,cs,cb,eh,ed,er,ehu,es,eb,ag, hy=-1, ac=-1, hel=-1, name){
   this.radi =  +r || random(25, 100);
   this.blobness = +b || random(2, 2.8);
   this.hue = +ch || random(40, 270);
@@ -27,17 +27,15 @@ constructor(xpos, ypos, r, m, b,ch,cs,cb,eh,ed,er,ehu,es,eb,ag, hy, ac, hel, nam
   this.release = false;
 
   //Stats
-  this.mood = +m || 100;
-  this.hygiene = +hy || 100;
-  this.health = +hel || 100;
-  this.activity = +ac || 100;
+  console.log(m,hy,hel,ac)
+  if(+m != -1){this.mood = +m}else{this.mood = 100};
+  if(+hy != -1){this.hygiene = +hy}else{this.hygiene = 100};
+  if(+hel != -1){this.health = +hel}else{this.health = 100};
+  if(+ac != -1){this.activity = +ac}else{this.activity = 100};
   this.name = name || null;
   console.log(this.name)
   if(this.name == null){
-    this.name = window.prompt("Name your new blob!", "Blobby");
-  }
-  if(this.name == null){
-    this.name = "Blobby";
+    this.name = window.prompt("Name your new blob!", "Blobby") || "Blobby";
   }
   this.actSat = map(this.activity,0,100,50,0);
   this.blobFill = color(this.hue, this.sat-this.actSat, this.bri);
@@ -114,4 +112,14 @@ update(){
   this.blobFill = color(this.hue, this.sat-this.actSat, this.bri);
   this.blobStroke = color(this.hue, this.sat-this.actSat, (this.bri-25));
 }
+
+getJSON() {
+  return({'radi':this.radi, 'mood':this.mood, 'blobness':this.blobness, 'hue':this.hue, 'sat':this.sat, 'bri':this.bri,
+  'eyeHeight':this.eyeHeight, 'eyeDist':this.eyeDist, 'eyeRadi':this.eyeRadi, 'eyeHue':this.eyeHue, 'eyeSat':this.eyeSat,
+  'eyeBri':this.eyeBri, 'created':this.created, 'hygiene':this.hygiene, 'activity':this.activity, 'health':this.health,
+  'name':str(this.name)});
+}
+
+
+//end of class Blob
 }

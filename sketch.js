@@ -95,10 +95,7 @@ dragStart = false;
 }
 
 function saveBlob(){
-  blobJSON = {'radi':blob.radi, 'mood':blob.mood, 'blobness':blob.blobness, 'hue':blob.hue, 'sat':blob.sat, 'bri':blob.bri,
-  'eyeHeight':blob.eyeHeight, 'eyeDist':blob.eyeDist, 'eyeRadi':blob.eyeRadi, 'eyeHue':blob.eyeHue, 'eyeSat':blob.eyeSat,
-  'eyeBri':blob.eyeBri, 'created':blob.created, 'hygiene':blob.hygiene, 'activity':blob.activity, 'health':blob.health,
-  'name':str(blob.name)};
+  blobJSON = blob.getJSON();
   localStorage.setItem('blob', JSON.stringify(blobJSON));
   localStorage.setItem('laston',  int(Math.floor(((Date.now() / 1000)/60)/60)));
 }
