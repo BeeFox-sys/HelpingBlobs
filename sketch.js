@@ -9,12 +9,12 @@ function setup() {
      console.log("Mobile");
    }
    grav = createVector(0,.5);
-   if (getCookie('blob') == ''){
+    if (localStorage.blob == undefined){
      blob = new Blob(width/2,-height);
-  } else {
-    loadBlob();
-  }
-   $("#moodLevel").html(blob.mood);
+   } else {
+     loadBlob();
+   }
+    $("#lastOn").html(localStorage.lastOn);
  }
  flies = []
 
@@ -34,13 +34,21 @@ function draw() {
   strokeWeight(5);
   rect(0,0,width-1,height-1);
 
-
-  $("#age").html(blob.age+" Hours");
+  if(blob.age == 1){
+    $("#age").html(blob.age+" Hour");
+} else if(blob.age>48*7){
+  $("#age").html(int(blob.age/24/7)+" Weeks");
+} else if(blob.age>48){
+  $("#age").html(int(blob.age/24)+" Days");
+} else{
+    $("#age").html(blob.age+" Hours");
+}
   $("#HealthBar").css("width", blob.health+"%")
   $("#MoodBar").css("width", blob.mood+"%")
   $("#HygieneBar").css("width", blob.hygiene+"%")
   $("#ActivityBar").css("width", blob.activity+"%")
   $("#blobName").html("<h1><b>"+blob.name+"</h1></b>")
+  $("#currentTime").html(Math.floor(((Date.now() / 1000)/60)/60))
 
   if(blob.health == 0 && !blob.release){
     window.alert(blob.name+" felt uncared for. \nThey ran away!");
@@ -75,14 +83,19 @@ dragStart = false;
 }
 
 function saveBlob(){
-  array = [blob.radi, blob.mood, blob.blobness, blob.hue, blob.sat, blob.bri, blob.eyeHeight, blob.eyeDist, blob.eyeRadi, blob.eyeHue, blob.eyeSat, blob.eyeBri, blob.created, blob.hygiene, blob.activity, blob.health, str(blob.name)];
-  document.cookie = "blob="+array;
-
+  blobJSON = {'radi':blob.radi, 'mood':blob.mood, 'blobness':blob.blobness, 'hue':blob.hue, 'sat':blob.sat, 'bri':blob.bri,
+  'eyeHeight':blob.eyeHeight, 'eyeDist':blob.eyeDist, 'eyeRadi':blob.eyeRadi, 'eyeHue':blob.eyeHue, 'eyeSat':blob.eyeSat,
+  'eyeBri':blob.eyeBri, 'created':blob.created, 'hygiene':blob.hygiene, 'activity':blob.activity, 'health':blob.health,
+  'name':str(blob.name)};
+  localStorage.setItem('blob', JSON.stringify(blobJSON));
+  localStorage.setItem('lastOn',  Math.floor(((Date.now() / 1000)/60)/60))
 }
 function loadBlob() {
-  array = getCookie('blob').split(",");
-  console.log(array);
-  blob = new Blob(width/2,-height,array[0],array[1],array[2],array[3],array[4],array[5],array[6],array[7],array[8],array[9],array[10],array[11], array[12], array[13], array[14],array[15],str(array[16]));
+  blobJSON = eval("(" + localStorage.blob + ')');
+  console.log(blobJSON);
+  blob = new Blob(width/2, -height, blobJSON.radi, blobJSON.mood, blobJSON.blobness, blobJSON.hue, blobJSON.sat,
+  blobJSON.bri, blobJSON.eyeHeight, blobJSON.eyeDist, blobJSON.eyeRadi, blobJSON.eyeHue, blobJSON.eyeSat,
+  blobJSON.eyeBri, blobJSON.created, blobJSON.hygiene, blobJSON.activity, blobJSON.health, blobJSON.name);
 
 }
 
@@ -90,25 +103,9 @@ function loadBlob() {
   resizeCanvas(windowWidth/3, windowWidth/3);
 }
 
-window.onbeforeunload = function(){
+window.onunload = function(){
   saveBlob();
 };
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
 
 function releaseBlob() {
   if(window.confirm("Release "+blob.name+"? They'll be gone forever!")){
